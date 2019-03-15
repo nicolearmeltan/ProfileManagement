@@ -1,0 +1,1 @@
+location for static files like images.
