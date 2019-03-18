@@ -4,9 +4,9 @@ const profileController = require('../controllers/profileController');
 
 router.get('/', profileController.getProfiles);
 
-router.get('/:profileId', profileController.getProfileById);
+router.get('/profile', profileController.getProfileByName);
 
-router.get('/?name=:profileName', profileController.getProfileById);
+router.get('/:profileId', profileController.getProfileById);
 
 router.post('/', profileController.addProfile);
 
