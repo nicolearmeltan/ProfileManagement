@@ -2,32 +2,29 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let profileSchema = new Schema({
-  gender: String,
-  name: {
-    title: String,
-    first: String,
-    last: String
-  },
-  location: {
-    street: String,
-    city: String,
-    state: String,
-    postcode: String,
-    coordinates: {
-      latitude: String,
-      longitude: String
-    },
-    timezone: {
-      offset: String,
-      description: String
-    }
-  },
+  title: String,
+  firstName: String,
+  middleName: String,
+  lastName: String,
   email: String,
-  dob: Date,
-  phone: String,
-  cell: String,
+  gender: String,
+  birthday: Date,
+  jobTitle: String,
+  mobileNumber: String,
+  bestSkill: String,
   picture: String,
-  nat: String
+  nationality: String,
+  language: String,
+  address: String,
+  country: String,
+  timeZone: String,
+  latitude: Number,
+  longitude: Number,
+  profileLink: String,
+  employer: String,
+  specialized: String,
+  salary: String,
+  goal: String
 }, { collection: 'profile' });
 
 module.exports = mongoose.model('profile', profileSchema);

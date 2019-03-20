@@ -1,24 +1,25 @@
 const profileModel = require('../models/profileModel');
 
 module.exports = {
-    getProfiles : (req, res, next) => {
-        console.log('PROFILES')
+    getProfiles : async (req, res, next) => {
         let count = parseInt(req.query.count) || 10;
         let page = parseInt(req.query.page) || 1;
 
         if(page < 0 || count < 0) {
             return res.status(404).send({ error: "Invalid Request"});
         }
-
         profileModel.find({})
-            .skip((count * page) -1)
+            .skip((count * page) - count)
             .limit(count)
             .exec((err, profiles) => {
-                if(err) {
-                    res.status(404).send({ error: err });
-                    next(err);
-                }
-                res.status(200).send({ data: profiles, page: page });
+                profileModel.countDocuments().exec((err, total) => {
+                    let pageCount = Math.ceil(total/count);
+                    if(err) {
+                        res.status(404).send({ error: err });
+                        next(err);
+                    }
+                    res.status(200).send({ data: profiles, page: page, pageCount: pageCount, total: total});
+                });
         });
     },
 
@@ -28,24 +29,11 @@ module.exports = {
                 res.status(404).send({ error: err });
                 next(err);
             }
-            console.log(req.params.profileId)
             res.status(201).send({ ata: profiles });
         });
     },
 
-    // getProfileByName : (req, res, next) => {
-    //     profileModel.find({name: new RegExp(String(req.query.name).toLowerCase())}, (err, profiles) => {
-    //         if(err) {
-    //             res.status(404).send({ error: err});
-    //             next(err);
-    //         }
-    //         res.status(201).send({data: profiles});
-    //     });
-    // },
-
     getProfileByName : (req, res, next) => {
-        console.log('WENT HERE')
-        console.log(req.query)
         profileModel.aggregate()
             .project({
                 fullname: { $concat: ["$name.first", " ", "$name.last"]},

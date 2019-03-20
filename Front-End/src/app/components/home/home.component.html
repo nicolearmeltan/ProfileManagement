@@ -1,0 +1,132 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Profile List</h6>
+  </div>
+  <div class="d-flex justify-content-between px-3 pt-3">
+    <div class="col-sm-12 col-md-6">
+      <div class="form-inline">
+        <label for="entries">display per page:</label>
+        <select
+          id="entries"
+          name="entries"
+          aria-controls="dataTable"
+          class="custom-select custom-select-sm form-control form-control-sm ml-2"
+        >
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div id="dataTable_filter" class="form-inline float-right">
+        <label for="search">Search: </label>
+        <input
+          id="search"
+          name="search"
+          type="search"
+          class="form-control form-control-sm ml-2"
+          placeholder=""
+          aria-controls="dataTable"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card-body">
+        <div class="table-responsive-lg">
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">
+                  Name <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+                <th scope="col">
+                  Email <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+                <th scope="col">
+                  Gender <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+                <th scope="col">
+                  Job Title <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+                <th scope="col">
+                  Skill <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+                <th scope="col">
+                  Country <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+                <th scope="col">
+                  Salary/hr <i class="fa fa-sort-alpha-up float-right"></i>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let profile of profiles">
+                <td>{{ profile.firstName }} {{ profile.lastName }}</td>
+                <td>{{ profile.email }}</td>
+                <td>{{ profile.gender }}</td>
+                <td>{{ profile.jobTitle }}</td>
+                <td>{{ profile.bestSkill }}</td>
+                <td>{{ profile.country }}</td>
+                <td>{{ profile.salary }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between px-4">
+    <span
+      class="dataTables_info"
+      id="dataTable_info"
+      role="status"
+      aria-live="polite"
+    >
+      Showing 1 to 10 of {{total}} entries
+    </span>
+    <div
+      class="dataTables_paginate paging_simple_numbers"
+      id="dataTable_paginate"
+    >
+      <ul class="pagination">
+        <li
+          class="paginate_button page-item previous disabled"
+          id="dataTable_previous"
+        >
+          <a
+            href="#"
+            aria-controls="dataTable"
+            data-dt-idx="0"
+            tabindex="0"
+            class="page-link"
+            >Previous</a
+          >
+        </li>
+        <li class="paginate_button page-item active">
+          <a
+            href="#"
+            aria-controls="dataTable"
+            data-dt-idx="1"
+            tabindex="0"
+            class="page-link"
+            >1</a
+          >
+        </li>
+        <li class="paginate_button page-item next" id="dataTable_next">
+          <a
+            href="#"
+            aria-controls="dataTable"
+            data-dt-idx="7"
+            tabindex="0"
+            class="page-link"
+            >Next</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
